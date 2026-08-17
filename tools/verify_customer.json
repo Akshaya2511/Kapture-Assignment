@@ -1,0 +1,26 @@
+{
+  "type": "function",
+  "function": {
+    "name": "verify_customer",
+    "description": "Verifies the customer's identity using verification type (Aadhaar last 4) and value. The call is restricted until verified.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "string",
+          "description": "The unique identifier of the customer in the database. Use 'CUST_9988' for Rahul Sharma."
+        },
+        "verification_type": {
+          "type": "string",
+          "enum": ["aadhaar_last_4", "pan_last_4", "dob"],
+          "description": "The verification method used to authenticate the customer."
+        },
+        "verification_value": {
+          "type": "string",
+          "description": "The digits or value provided by the user. For Rahul, the correct last 4 digits of Aadhaar are '1234'."
+        }
+      },
+      "required": ["customer_id", "verification_type", "verification_value"]
+    }
+  }
+}

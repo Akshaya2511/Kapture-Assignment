@@ -1,0 +1,25 @@
+{
+  "type": "function",
+  "function": {
+    "name": "log_promise_to_pay",
+    "description": "Logs a Promise-to-Pay (PTP) date and amount when a customer agrees to pay on a specific date in the future.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "string",
+          "description": "The unique identifier of the customer. Use 'CUST_9988' for Rahul Sharma."
+        },
+        "ptp_date": {
+          "type": "string",
+          "description": "The date the customer has promised to pay, formatted as YYYY-MM-DD. Must be within 3 days."
+        },
+        "ptp_amount": {
+          "type": "number",
+          "description": "The amount the customer has promised to pay. Defaults to 8499.00."
+        }
+      },
+      "required": ["customer_id", "ptp_date", "ptp_amount"]
+    }
+  }
+}

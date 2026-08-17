@@ -1,0 +1,18 @@
+{
+  "type": "function",
+  "function": {
+    "name": "escalate_to_agent",
+    "description": "Escalates the call by transferring the customer to a live human agent (e.g., when a dispute, permanent hardship, or customer request occurs).",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "enum": ["disputed_amount", "financial_hardship", "customer_request", "hostile_behavior", "unsupported_language"],
+          "description": "The specific reason for escalating the call to a human agent."
+        }
+      },
+      "required": ["reason"]
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "function",
+  "function": {
+    "name": "mark_disposition",
+    "description": "Logs the final outcome of the call in the database or CRM. Run this before hanging up the call.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "string",
+          "description": "The unique identifier of the customer. Use 'CUST_9988' for Rahul Sharma."
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "PTP_COLLECTED",
+            "ALREADY_PAID",
+            "DISPUTED",
+            "HARDSHIP_ESCALATION",
+            "CALLBACK_REQUESTED",
+            "DNC_REQUEST",
+            "WRONG_NUMBER",
+            "VERIFICATION_FAILED",
+            "REFUSED_VERIFICATION",
+            "REFUSED_IDENTITY_CONFIRMATION",
+            "ABUSIVE_TERMINATED",
+            "NO_RESPONSE_TERMINATED"
+          ],
+          "description": "The final categorized outcome of the call."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional free-text comments describing the details of the call resolution (e.g., PTP date, dispute reasons, transaction references, or callback timings)."
+        }
+      },
+      "required": ["customer_id", "disposition"]
+    }
+  }
+}

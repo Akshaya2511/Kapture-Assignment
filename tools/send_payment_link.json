@@ -1,0 +1,26 @@
+{
+  "type": "function",
+  "function": {
+    "name": "send_payment_link",
+    "description": "Triggers an SMS or WhatsApp notification to the customer containing their secure payment link for the overdue EMI.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "string",
+          "description": "The unique identifier of the customer. Use 'CUST_9988' for Rahul Sharma."
+        },
+        "amount": {
+          "type": "number",
+          "description": "The amount to be collected. Default is 8499.00."
+        },
+        "channel": {
+          "type": "string",
+          "enum": ["SMS", "WhatsApp", "Email"],
+          "description": "The communication channel to send the payment link."
+        }
+      },
+      "required": ["customer_id", "amount", "channel"]
+    }
+  }
+}
