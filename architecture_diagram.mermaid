@@ -1,0 +1,33 @@
+graph TD
+    classDef telephony fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef gateway fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef brain fill:#dfd,stroke:#333,stroke-width:2px;
+    classDef server fill:#fdd,stroke:#333,stroke-width:2px;
+    
+    Customer[Customer Phone / PSTN] <-->|SIP Trunk / WebRTC| Vapi[Vapi.ai Voice Gateway]
+    
+    subgraph Vapi.ai Pipeline [Turn-taking Latency Budget: ~650ms / Limit: 1.2s]
+        STT[Deepgram Nova-2 STT <br> Latency: ~120ms]
+        Orchestration[GPT-4o-mini LLM <br> Latency: ~280ms]
+        TTS[Cartesia TTS <br> Latency: ~100ms]
+    end
+    
+    Vapi <-->|Audio Stream| STT
+    STT -->|Text Transcript| Orchestration
+    Orchestration -->|Text Output Stream| TTS
+    TTS <-->|Audio Stream| Vapi
+    
+    Orchestration <-->|Tool Call JSON| Webhook[FastAPI Webhook Server <br> Latency: ~80ms]
+    
+    subgraph Mock Backend Layer
+        Database[(Kapture CRM database)]
+        SMS[SMS Gateway / Twilio]
+    end
+    
+    Webhook <-->|Read / Write| Database
+    Webhook -->|Trigger SMS Link| SMS
+
+    class Customer telephony;
+    class Vapi gateway;
+    class STT,Orchestration,TTS brain;
+    class Webhook,Database,SMS server;
